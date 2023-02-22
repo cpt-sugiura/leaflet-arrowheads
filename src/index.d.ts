@@ -17,7 +17,7 @@ interface ArrowheadOptions extends L.PolylineOptions, SingleArrowheadOptions {
 	 * The number and spacing of arrowheads to draw along the polyline.
 	 * Defaults to 'allvertices'
 	 */
-	frequency?: number | `${number}px` | `${number}m` | 'allvertices' | 'endonly';
+	frequency?: number | `${number}px` | `${number}m` | 'allvertices' | 'endonly' | 'startonly' | 'startAndEnd';
 	/**
 	 * If the size of the arrowheads, when given in percent, should be a percentage proportional
 	 * to the total length of the polyline, rather than the average of all the segments.

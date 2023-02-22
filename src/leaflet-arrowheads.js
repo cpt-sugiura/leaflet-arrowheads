@@ -210,6 +210,31 @@ L.Polyline.include({
 						latlngs[latlngs.length - 1]
 					) + 180,
 				];
+			} else if (options.frequency === 'startonly' && latlngs.length >= 2) {
+				derivedLatLngs = [latlngs[0]];
+
+				derivedBearings = [
+					L.GeometryUtil.angle(
+						this._map,
+						latlngs[1],
+						latlngs[0]
+					) + 180,
+				];
+			} else if (options.frequency === 'startAndEnd' && latlngs.length >= 2) {
+				derivedLatLngs = [latlngs[0], latlngs[latlngs.length - 1]];
+
+				derivedBearings = [
+					L.GeometryUtil.angle(
+						this._map,
+						latlngs[1],
+						latlngs[0]
+					) + 180,
+					L.GeometryUtil.angle(
+						this._map,
+						latlngs[latlngs.length - 2],
+						latlngs[latlngs.length - 1]
+					) + 180,
+				];
 			} else {
 				derivedLatLngs = [];
 				let interpolatedPoints = [];
@@ -336,7 +361,7 @@ L.Polyline.include({
 					let sizePercent = size.slice(0, size.length - 1);
 					let hatSize = (() => {
 						if (
-							options.frequency === 'endonly' &&
+							(options.frequency === 'startonly' || options.frequency === 'startAndEnd' || options.frequency === 'endonly') &&
 							options.proportionalToTotal
 						) {
 							return (totalLength * sizePercent) / 100;
