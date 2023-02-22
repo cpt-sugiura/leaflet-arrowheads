@@ -323,6 +323,17 @@ L.Polyline.include({
 					y: derivedXY.y + dyRight,
 				};
 
+				if(
+					Number.isNaN(leftWingXY.x) ||
+					Number.isNaN(leftWingXY.y) ||
+					Number.isNaN(dxLeft) ||
+					Number.isNaN(dxRight) ||
+					Number.isNaN(dyLeft) ||
+					Number.isNaN(dyRight)
+				){
+					return;
+				}
+
 				let leftWingPoint = this._map.layerPointToLatLng(leftWingXY),
 					rightWingPoint = this._map.layerPointToLatLng(rightWingXY);
 
